@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import User from '../models/userModel.js';
-import catchAsync from './catchAsync.js'
+import catchAsync from '../managers/catchAsync.js'
 import { isValidNumber } from 'libphonenumber-js';
 
 const joiCreateSchema = Joi.object({
@@ -26,7 +26,7 @@ const joiCreateSchema = Joi.object({
     }),
     phoneNo:Joi.string().custom((value, helper)=>{
         if(!isValidNumber(value)) return helper.message("Enter a valid phone number")
-    })
+    }).required()
 })
 
 const joiUpdateSchema =Joi.object({

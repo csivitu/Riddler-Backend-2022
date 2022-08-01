@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
-import AppError from "../utils/AppError.js";
-import catchAsync from "../utils/catchAsync.js";
+import AppError from "../managers/AppError.js";
+import catchAsync from "../managers/catchAsync.js";
 import { createSendToken } from "./authController.js";
 import { getAllDocs, getDoc, updateDoc, deleteDoc } from "../utils/HandlerFactory.js";
 import sendEmail from "../utils/Email.js";

@@ -1,18 +1,19 @@
 import nodemailer from 'nodemailer'
+import envHandler from '../managers/envHandler.js';
 
 const sendEmail = async values =>{
     
     const transporter= nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
+        host: envHandler("EMAIL_HOST"),
+        port: envHandler("EMAIL_PORT"),
         auth:{
-            user:process.env.EMAIL_USER,
-            pass:process.env.EMAIL_PASS
+            user:envHandler("EMAIL_USER"),
+            pass:envHandler("EMAIL_PASS")
         }
     });
 
     const mailOptions= {
-        from: `CSI <${process.env.CSI_MAIL}>`,
+        from: `CSI <${envHandler("CSI_MAIL")}>`,
         to: values.email,
         subject: values.subject,
         text: values.body

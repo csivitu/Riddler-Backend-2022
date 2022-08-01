@@ -1,6 +1,6 @@
 import express from "express";
-import { signup, login, protect, logout } from "../Controllers/authController.js";
-import { getAllUsers, UpdatePassword, getUser, updateUser, deleteUser, filterBody, forgotPassword, resetPassword, uploadProficPic, resizePic } from "../Controllers/userController.js";
+import { signup, login, protect, logout } from "../controllers/authController.js";
+import { getAllUsers, UpdatePassword, getUser, updateUser, deleteUser, filterBody, forgotPassword, resetPassword, uploadProficPic, resizePic } from "../controllers/userController.js";
 import {joiCreateValidator, joiUpdateValidator} from "../utils/joiValidator.js";
 
 const userRouter= express.Router()

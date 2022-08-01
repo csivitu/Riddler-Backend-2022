@@ -2,12 +2,11 @@ import express from "express";
 import morgan from "morgan"
 import dotenv from 'dotenv'
 import path from 'path'
-import AppError from "./utils/AppError.js";
-import { noURL } from "./Controllers/ErrorController.js";
+import AppError from "./managers/AppError.js";
+import { noURL } from "./controllers/ErrorController.js";
 import userRouter from "./routers/userRouter.js";
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
-import bodyParser from "body-parser";
 import cors from 'cors'
 
 const __dirname=path.resolve() 

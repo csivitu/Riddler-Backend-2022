@@ -1,6 +1,6 @@
-import catchAsync from "./catchAsync.js";
+import catchAsync from "../managers/catchAsync.js";
 import APIFeatures from "./APIFeatures.js"
-import AppError from "./AppError.js";
+import AppError from "../managers/AppError.js";
 
 export const getAllDocs = Model => catchAsync(async (req, res, next)=>{
     const features = new APIFeatures(Model.find(),req.query)

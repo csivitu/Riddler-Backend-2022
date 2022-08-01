@@ -1,4 +1,5 @@
-import AppError from "../utils/AppError.js";
+import AppError from "../managers/AppError.js";
+import envHandler from "../managers/envHandler.js";
 
 const CastErrorHandler= err=>{
     const message=`Invalid ${err.path}: ${err.value}.`
@@ -33,14 +34,14 @@ const JoiErrorHandler= err=>{
 export const noURL=(err, req, res, next)=>{   
     err.statusCode= err.statusCode || 500;
     err.status= err.status || "error";
-    if(process.env.NODE_ENV==='dev'){
+    if(envHandler("NODE_ENV")==='dev'){
         res.status(err.statusCode).json({
             status:err.status,
             error:err,
             message:err.message,
             stack:err.stack
     })
-    } else if(process.env.NODE_ENV==='prod'){
+    } else if(envHandler("NODE_ENV")==='prod'){
         let error={...err};
 
         if(err.name==="CastError") error=CastErrorHandler(error)

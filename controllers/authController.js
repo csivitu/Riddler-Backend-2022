@@ -1,21 +1,22 @@
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import { promisify } from "util";
-import AppError from "../utils/AppError.js";
-import catchAsync from "../utils/catchAsync.js";
+import AppError from "../managers/AppError.js";
+import catchAsync from "../managers/catchAsync.js";
+import envHandler from "../managers/envHandler.js";
 
 export const createSendToken = (user, statusCode, res)=>{
-    const token=jwt.sign({ id:user._id }, process.env.JWT_KEY, {expiresIn: process.env.JWT_TIME*24*60})
+    const token=jwt.sign({ id:user._id }, envHandler("JWT_KEY"), {expiresIn: envHandler("JWT_TIME")*24*60})
     user.password=undefined
     
     const cookieSettings={
         expires: new Date(
-            Date.now() + process.env.JWT_TIME*24*60*60*1000
+            Date.now() + envHandler("JWT_TIME")*24*60*60*1000
         ),
         httpOnly:true
     };
 
-    if(process.env.NODE_ENV==="prod") cookieSettings.secure=true;
+    if(envHandler("NODE_ENV")==="prod") cookieSettings.secure=true;
 
     res.cookie('jwt', token, cookieSettings)
 
@@ -53,7 +54,7 @@ export const protect = catchAsync(async (req, res, next)=>{
     
     if(!token) return next(new AppError("You are not Logged in. Please Login to continue", 401))
 
-    const decoded= await promisify(jwt.verify)(token, process.env.JWT_KEY)
+    const decoded= await promisify(jwt.verify)(token, envHandler("JWT_KEY"))
 
     const user= await User.findById(decoded.id)
 

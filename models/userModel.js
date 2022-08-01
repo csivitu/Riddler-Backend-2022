@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import validator from "validator";
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import AppError from "../utils/AppError.js";
+import AppError from "../managers/AppError.js";
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -22,8 +21,8 @@ const userSchema = new mongoose.Schema({
         default:'default.jpg'
     },
     phoneNo:{
-        type:Number
-        //use libphone google lib for verification
+        type:Number,
+        required:true
     },
     username:{
         type:String,
