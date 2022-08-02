@@ -3,7 +3,7 @@ import morgan from "morgan"
 import dotenv from 'dotenv'
 import path from 'path'
 import AppError from "./managers/AppError.js";
-import { noURL } from "./controllers/ErrorController.js";
+import { noURL } from "./controllers/errorController.js";
 import userRouter from "./routers/userRouter.js";
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
